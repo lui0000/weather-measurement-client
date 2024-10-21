@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
 
+        ObservableList<PieChart.Data> data
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter 1 for manual entry and 2 for automatic entry");
