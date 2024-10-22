@@ -2,6 +2,9 @@ package org.example;
 
 import org.example.dto.MeasurementDTO;
 import org.example.dto.SensorDTO;
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 import java.util.Random;
@@ -10,15 +13,6 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
 
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Grapefruit", 13),
-                        new PieChart.Data("Oranges", 25),
-                        new PieChart.Data("Plums", 10),
-                        new PieChart.Data("Pears", 22),
-                        new PieChart.Data("Apples", 30));
-        final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Imported Fruits");
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter 1 for manual entry and 2 for automatic entry");
@@ -37,6 +31,8 @@ public class Client {
 
 
 
+
+
         switch (choice) {
             case 1:
                 sensorDTO.setName("sensor 1");
@@ -49,6 +45,16 @@ public class Client {
                 String postResponse = restTemplate.postForObject(addUrl, postRequest, String.class);
                 System.out.println(getResponse);
                 System.out.println(postResponse);
+
+                getResponse.
+                double[] xData = new double[] { 0.0, 1.0, 2.0 };
+                double[] yData = new double[] { 2.0, 1.0, 0.0 };
+
+                // Create Chart
+                XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+
+                // Show it
+                new SwingWrapper(chart).displayChart();
 
 
                 break;
@@ -72,6 +78,15 @@ public class Client {
                     String postResponse1 = restTemplate.postForObject(addUrl, postRequest, String.class);
                     System.out.println(getResponse1);
                     System.out.println(postResponse1);
+
+                    double[] xData = new double[] { 0.0, 1.0, 2.0 };
+                    double[] yData = new double[] { 2.0, 1.0, 0.0 };
+
+                    // Create Chart
+                    XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+
+                    // Show it
+                    new SwingWrapper(chart).displayChart();
 
                 }
 
