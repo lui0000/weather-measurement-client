@@ -1,5 +1,6 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.dto.MeasurementDTO;
 import org.example.dto.SensorDTO;
 import org.knowm.xchart.QuickChart;
@@ -46,15 +47,16 @@ public class Client {
                 System.out.println(getResponse);
                 System.out.println(postResponse);
 
-                getResponse.
-                double[] xData = new double[] { 0.0, 1.0, 2.0 };
-                double[] yData = new double[] { 2.0, 1.0, 0.0 };
-
-                // Create Chart
-                XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
-
-                // Show it
-                new SwingWrapper(chart).displayChart();
+//                getResponse.
+//
+//                double[] xData = new double[] { 0.0, 1.0, 2.0 };
+//                double[] yData = new double[] { 2.0, 1.0, 0.0 };
+//
+//                // Create Chart
+//                XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+//
+//                // Show it
+//                new SwingWrapper(chart).displayChart();
 
 
                 break;
@@ -79,14 +81,16 @@ public class Client {
                     System.out.println(getResponse1);
                     System.out.println(postResponse1);
 
-                    double[] xData = new double[] { 0.0, 1.0, 2.0 };
-                    double[] yData = new double[] { 2.0, 1.0, 0.0 };
+                    processResponse(getResponse1);
 
-                    // Create Chart
-                    XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
-
-                    // Show it
-                    new SwingWrapper(chart).displayChart();
+//                    double[] xData = new double[] { 0.0, 1.0, 2.0 };
+//                    double[] yData = new double[] { 2.0, 1.0, 0.0 };
+//
+//                    // Create Chart
+//                    XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+//
+//                    // Show it
+//                    new SwingWrapper(chart).displayChart();
 
                 }
 
@@ -96,7 +100,20 @@ public class Client {
         }
 
 
+    }
 
+    private static void processResponse(String jsonResponse) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            MeasurementDTO[] measurements = objectMapper.readValue(jsonResponse, MeasurementDTO[].class);
+
+            for (MeasurementDTO measurement : measurements) {
+                int temperature = (int) measurement.getTemperature(); // Преобразование в int
+                System.out.println("Temperature: " + temperature);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
