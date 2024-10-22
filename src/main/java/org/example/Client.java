@@ -10,8 +10,15 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
 
-        ObservableList<PieChart.Data> data
-
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Grapefruit", 13),
+                        new PieChart.Data("Oranges", 25),
+                        new PieChart.Data("Plums", 10),
+                        new PieChart.Data("Pears", 22),
+                        new PieChart.Data("Apples", 30));
+        final PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("Imported Fruits");
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter 1 for manual entry and 2 for automatic entry");
