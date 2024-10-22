@@ -81,7 +81,6 @@ public class Client {
                     System.out.println(getResponse1);
                     System.out.println(postResponse1);
 
-                    processResponse(getResponse1);
 
 //                    double[] xData = new double[] { 0.0, 1.0, 2.0 };
 //                    double[] yData = new double[] { 2.0, 1.0, 0.0 };
@@ -102,19 +101,7 @@ public class Client {
 
     }
 
-    private static void processResponse(String jsonResponse) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            MeasurementDTO[] measurements = objectMapper.readValue(jsonResponse, MeasurementDTO[].class);
 
-            for (MeasurementDTO measurement : measurements) {
-                int temperature = (int) measurement.getTemperature(); // Преобразование в int
-                System.out.println("Temperature: " + temperature);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
